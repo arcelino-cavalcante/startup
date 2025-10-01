@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <!-- ============== METADADOS E CABEÇALHO DO DOCUMENTO ============== -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Título da Página -->
+    <title>Sobre Nós - ArcDev</title>
+
+    <!-- Favicon Personalizado para a marca ArcDev. -->
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%231a1a1a%22/><text x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22central%22 text-anchor=%22middle%22 font-size=%2260%22 font-family=%22Montserrat%22 font-weight=%22bold%22 fill=%22%23ffffff%22>AD</text></svg>">
+
+    <!-- Adiciona a fonte 'Montserrat' do Google Fonts para um design elegante -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <!-- O CÓDIGO CSS (ESTILOS) COMEÇA AQUI -->
+    <style>
+        /* Estilos importados do index.html para consistência */
+        :root {
+            --primary-color: #0a0a0a;
+            --secondary-color: #1a1a1a;
+            --text-color: #e0e0e0;
+            --accent-color: #ffffff;
+            --light-gray: #a0a0a0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 0 20px;
+        }
+
+        header {
+            padding: 1rem 0;
+            border-bottom: 1px solid #222;
+            position: sticky;
+            top: 0;
+            background-color: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: var(--accent-color);
+            font-weight: bold;
+            font-size: 1.8rem;
+            text-decoration: none;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        nav a {
+            color: var(--light-gray);
+            text-decoration: none;
+            font-weight: 400;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        .content-section {
+            padding: 80px 0;
+        }
+
+        .content-section h1,
+        .content-section h2 {
+            text-align: center;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+        }
+
+        .section-description {
+            max-width: 700px;
+            margin: 0 auto 50px auto;
+            color: var(--light-gray);
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            background-color: var(--secondary-color);
+            color: var(--light-gray);
+            border-top: 1px solid #222;
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            transform: translateY(30px);
+        }
+
+        .animate-on-scroll.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 {
+            transition-delay: 0.1s;
+        }
+
+        .delay-2 {
+            transition-delay: 0.2s;
+        }
+
+        .delay-3 {
+            transition-delay: 0.3s;
+        }
+
+        /* Estilos específicos para a página "Sobre Nós" */
+        .mission-vision-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 80px;
+            text-align: left;
+        }
+
+        .mission-vision-grid h3 {
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+        }
+
+        .team-layout-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 60px;
+        }
+
+        .ceo-wrapper {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .team-photo {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 4px solid var(--accent-color);
+            margin: 0 auto;
+            overflow: hidden;
+            background-color: #222;
+        }
+
+        .team-photo.subordinate {
+            width: 140px;
+            height: 140px;
+            border-width: 3px;
+        }
+
+        .team-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .team-divider {
+            width: 2px;
+            height: 50px;
+            background-color: #333;
+            margin-bottom: 40px;
+        }
+
+        .sub-team-wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            width: 100%;
+        }
+
+        .team-member {
+            text-align: center;
+            width: 200px;
+        }
+
+        .team-info {
+            margin-top: 20px;
+        }
+
+        .team-info h3 {
+            color: var(--accent-color);
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+        }
+
+        .team-info p {
+            color: var(--light-gray);
+            font-size: 0.9rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 20px;
+        }
+
+        .social-links a {
+            color: var(--light-gray);
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        .social-links svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        @media (max-width: 600px) {
+            header .container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .mission-vision-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <a href="index.html" class="logo">ArcDev</a>
+            <nav id="main-nav">
+                <ul>
+                    <li><a href="index.html#como-funciona">Como Funciona</a></li>
+                    <li><a href="index.html#orcamento">Orçamento</a></li>
+                    <li><a href="sobre.html">Sobre Nós</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="content-section">
+            <div class="container">
+                <h1 class="animate-on-scroll">A Força por Trás da Inovação</h1>
+                <p class="section-description animate-on-scroll delay-1">
+                    A ArcDev nasceu da visão de que a tecnologia deve ser uma aliada acessível para todos os negócios.
+                    Somos mais do que uma empresa; somos uma comunidade de especialistas apaixonados por resolver
+                    problemas e criar soluções que geram resultados reais.
+                </p>
+
+                <div class="mission-vision-grid">
+                    <div class="animate-on-scroll delay-2">
+                        <h3>Nossa Missão</h3>
+                        <p>Capacitar empresas de todos os tamanhos com soluções tecnológicas sob medida, transformando
+                            processos complexos em operações eficientes e automatizadas.</p>
+                    </div>
+                    <div class="animate-on-scroll delay-3">
+                        <h3>Nossa Visão</h3>
+                        <p>Ser a ponte de referência entre desafios de negócio e soluções tecnológicas inovadoras,
+                            construindo um ecossistema onde as melhores ideias encontram os melhores desenvolvedores.
+                        </p>
+                    </div>
+                </div>
+
+                <h2 class="animate-on-scroll">Conheça os Nossos Especialistas</h2>
+
+                <div class="team-layout-container">
+                    <!-- CEO / Fundador -->
+                    <div class="ceo-wrapper animate-on-scroll delay-1">
+                        <div class="team-photo">
+                            <img src="imagens/image.png" alt="Foto do CEO">
+                        </div>
+                        <div class="team-info">
+                            <h3>Arcelino Cavalcante</h3>
+                            <p>CEO & Fundador</p>
+                        </div>
+                    </div>
+
+                    <!-- Linha Conectora -->
+                    <div class="team-divider animate-on-scroll delay-2"></div>
+
+                    <!-- Restante da Equipa -->
+                    <div class="sub-team-wrapper">
+                        <div class="team-member animate-on-scroll delay-3">
+                            <div class="team-photo subordinate">
+                                <img src="https://placehold.co/150x150/1a1a1a/ffffff?text=Prog."
+                                    alt="Foto do Programador 1">
+                            </div>
+                            <div class="team-info">
+                                <h3>José Portinari</h3>
+                                <p>Programador Full-Stack</p>
+                            </div>
+                        </div>
+                        <div class="team-member animate-on-scroll delay-3">
+                            <div class="team-photo subordinate">
+                                <img src="https://placehold.co/150x150/1a1a1a/ffffff?text=Prog."
+                                    alt="Foto do Programador 2">
+                            </div>
+                            <div class="team-info">
+                                <h3>João Martines</h3>
+                                <p>Programadora Front-End</p>
+                            </div>
+                        </div>
+                        <div class="team-member animate-on-scroll delay-3">
+                            <div class="team-photo subordinate">
+                                <img src="https://placehold.co/150x150/1a1a1a/ffffff?text=Vendas"
+                                    alt="Foto da Assistente de Vendas">
+                            </div>
+                            <div class="team-info">
+                                <h3>Maria Estela</h3>
+                                <p>Assistente de Vendas</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <!-- Lembre-se de substituir 'your-profile', 'yourphonenumber', e 'your-username' pelos seus links reais. -->
+                <a href="https://instagram.com/your-profile" target="_blank" rel="noopener noreferrer"
+                    aria-label="Instagram da ArcDev">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                </a>
+                <a href="https://wa.me/yourphonenumber" target="_blank" rel="noopener noreferrer"
+                    aria-label="WhatsApp da ArcDev">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24"
+                        height="24">
+                        <path
+                            d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zM12.04 20.21c-1.54 0-3.04-.39-4.38-1.15l-.31-.18-3.26.86.88-3.18-.2-.33c-.85-1.4-1.29-3-1.29-4.64 0-4.52 3.67-8.19 8.19-8.19 2.22 0 4.29.86 5.8 2.37s2.37 3.58 2.37 5.8c0 4.52-3.67 8.19-8.19 8.19zm4.27-5.47c-.24-.12-1.42-.7-1.64-.78-.23-.08-.39-.12-.56.12-.17.24-.62.78-.76.94s-.28.17-.52.05c-.24-.12-1.02-.38-1.94-1.2s-1.4-1.68-1.56-1.98c-.17-.3-.02-.46.1-.61.11-.13.24-.33.36-.49.12-.17.16-.28.24-.48.08-.2.04-.37-.02-.49-.06-.12-.56-1.34-.76-1.84s-.4-.42-.56-.42h-.5c-.17 0-.42.06-.64.3s-.84.82-.84 2c0 1.18.86 2.32 1 2.48.12.17 1.69 2.58 4.1 3.6.58.24 1.03.38 1.39.49.52.16 1 .14 1.38.08.43-.06 1.42-.58 1.62-1.14s.2-1.06.14-1.18c-.05-.12-.2-.18-.44-.3z">
+                        </path>
+                    </svg>
+                </a>
+                <a href="https://github.com/your-username" target="_blank" rel="noopener noreferrer"
+                    aria-label="GitHub da ArcDev">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24"
+                        height="24">
+                        <path
+                            d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.034c-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.565 21.796 24 17.3 24 12c0-6.627-5.373-12-12-12z">
+                        </path>
+                    </svg>
+                </a>
+            </div>
+            <p>&copy; 2025 ArcDev. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Lógica de animação de scroll
+        document.addEventListener('DOMContentLoaded', () => {
+            const animatedElements = document.querySelectorAll('.animate-on-scroll');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('show');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            animatedElements.forEach(el => observer.observe(el));
+        });
+    </script>
+
+</body>
+
+</html>

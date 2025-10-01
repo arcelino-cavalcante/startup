@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <!-- ============== METADADOS E CABEÇALHO DO DOCUMENTO ============== -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Título da Página -->
+    <title>ArcDev - Orçamentos para Sistemas e Automações</title>
+
+    <!-- Otimização de SEO: Descrição da página para os motores de busca. -->
+    <meta name="description"
+        content="Peça um orçamento para sistemas e automações. A ArcDev conecta você a uma comunidade de desenvolvedores para receber as melhores propostas para o seu projeto.">
+    <!-- Otimização de SEO: Palavras-chave relevantes para o seu negócio. -->
+    <meta name="keywords"
+        content="orçamento sistema, orçamento automação, orçamento bot, desenvolvimento de software, programação sob medida">
+
+    <!-- Favicon Personalizado para a marca ArcDev. -->
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%231a1a1a%22/><text x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22central%22 text-anchor=%22middle%22 font-size=%2260%22 font-family=%22Montserrat%22 font-weight=%22bold%22 fill=%22%23ffffff%22>AD</text></svg>">
+
+    <!-- Adiciona a fonte 'Montserrat' do Google Fonts para um design elegante -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <!-- O CÓDIGO CSS (ESTILOS) COMEÇA AQUI -->
+    <style>
+        /* ============== CONFIGURAÇÕES GLOBAIS E VARIÁVEIS DE COR ============== */
+        :root {
+            --primary-color: #0a0a0a;
+            /* Um preto um pouco mais suave */
+            --secondary-color: #1a1a1a;
+            --text-color: #e0e0e0;
+            --accent-color: #ffffff;
+            --light-gray: #a0a0a0;
+            --success-color: #4caf50;
+            --error-color: #f44336;
+        }
+
+        /* ============== RESET BÁSICO ============== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Estilos base para o corpo da página. */
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 0 20px;
+        }
+
+        /* ============== ESTILOS DO PRELOADER ============== */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--primary-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 1s ease, visibility 1s ease;
+        }
+
+        .preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .preloader-logo {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: bold;
+            font-size: 3rem;
+            color: var(--accent-color);
+            display: flex;
+        }
+
+        @keyframes fadeInLetter {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .preloader-logo span {
+            opacity: 0;
+            animation: fadeInLetter 0.5s forwards;
+        }
+
+        .preloader-logo span:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .preloader-logo span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .preloader-logo span:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .preloader-logo span:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .preloader-logo span:nth-child(5) {
+            animation-delay: 0.5s;
+        }
+
+        .preloader-logo span:nth-child(6) {
+            animation-delay: 0.6s;
+        }
+
+        /* ============== ESTILOS DO CABEÇALHO (HEADER) ============== */
+        header {
+            padding: 1rem 0;
+            border-bottom: 1px solid #222;
+            position: sticky;
+            top: 0;
+            background-color: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: var(--accent-color);
+            font-weight: bold;
+            font-size: 1.8rem;
+            letter-spacing: 1px;
+            text-decoration: none;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        nav a {
+            color: var(--light-gray);
+            text-decoration: none;
+            font-weight: 400;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        /* ============== SEÇÃO INICIAL (HERO) COM PARALLAX ============== */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+            padding: 0 20px;
+        }
+
+        .parallax-bg-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop');
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            z-index: -2;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(10, 10, 10, 0.7);
+            z-index: -1;
+        }
+
+        .hero-content {
+            z-index: 1;
+            transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+            line-height: 1.2;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2.5rem auto;
+            color: var(--light-gray);
+        }
+
+        /* ============== ESTILOS DAS SEÇÕES DE CONTEÚDO ============== */
+        .content-section {
+            padding: 80px 0;
+            text-align: left;
+        }
+
+        .content-section.dark-bg {
+            background-color: var(--secondary-color);
+            border-top: 1px solid #222;
+            border-bottom: 1px solid #222;
+        }
+
+        .content-section h2 {
+            font-size: 2rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .section-description {
+            max-width: 600px;
+            margin: 0 auto 50px auto;
+            color: var(--light-gray);
+            text-align: center;
+        }
+
+        /* ESTILOS DA GRELHA DE SERVIÇOS */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            text-align: left;
+        }
+
+        .service-card {
+            background-color: var(--secondary-color);
+            padding: 25px;
+            border: 1px solid #222;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .service-card svg {
+            width: 32px;
+            height: 32px;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+
+        .service-card h3 {
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .service-card p {
+            color: var(--light-gray);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* ============== ESTILOS DA TIMELINE "COMO FUNCIONA" ============== */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 50px auto 0;
+            padding: 20px 0;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 3px;
+            background-color: #222;
+            top: 0;
+            bottom: 0;
+            left: 25px;
+        }
+
+        .timeline-item {
+            padding: 10px 0 30px 70px;
+            position: relative;
+        }
+
+        .timeline-item .timeline-dot {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            left: 15px;
+            background-color: var(--secondary-color);
+            border: 4px solid var(--accent-color);
+            top: 5px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .timeline-content {
+            background-color: var(--secondary-color);
+            padding: 20px;
+            border: 1px solid #222;
+        }
+
+        .timeline-content h3 {
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .timeline-content p {
+            font-size: 0.9rem;
+            color: var(--light-gray);
+        }
+
+        /* ============== ESTILOS DO FORMULÁRIO DE ORÇAMENTO ============== */
+        .orcamento-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 8px;
+            color: var(--light-gray);
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            background-color: var(--secondary-color);
+            border: 1px solid #333;
+            color: var(--text-color);
+            padding: 15px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            border-radius: 0;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+
+        .form-status {
+            margin-top: 20px;
+            padding: 15px 20px;
+            background-color: var(--secondary-color);
+            text-align: left;
+            font-weight: bold;
+            border-left: 5px solid;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.4s ease;
+        }
+
+        .form-status.is-visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .form-status.success {
+            border-color: var(--success-color);
+            color: var(--success-color);
+        }
+
+        .form-status.error {
+            border-color: var(--error-color);
+            color: var(--error-color);
+        }
+
+        .form-status svg {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+
+        /* ============== ESTILOS DO BOTÃO ============== */
+        .btn {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 28px;
+            border: 1px solid var(--accent-color);
+            color: var(--primary-color);
+            background-color: var(--accent-color);
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            border-radius: 0;
+            cursor: pointer;
+            font-size: 1.1rem;
+            width: 100%;
+        }
+
+        .btn:hover {
+            background-color: transparent;
+            color: var(--accent-color);
+        }
+
+        /* ============== ESTILOS DO RODAPÉ (FOOTER) ============== */
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            background-color: var(--secondary-color);
+            color: var(--light-gray);
+            border-top: 1px solid #222;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 20px;
+        }
+
+        .social-links a {
+            color: var(--light-gray);
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        .social-links svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* ============== ANIMAÇÕES DE SCROLL (ROLAGEM) ============== */
+        .animate-on-scroll {
+            opacity: 0;
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            transform: translateY(30px);
+        }
+
+        .animate-on-scroll.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 {
+            transition-delay: 0.1s;
+        }
+
+        .delay-2 {
+            transition-delay: 0.2s;
+        }
+
+        .delay-3 {
+            transition-delay: 0.3s;
+        }
+
+        .delay-4 {
+            transition-delay: 0.4s;
+        }
+
+        /* ============== MEDIA QUERIES PARA RESPONSIVIDADE ============== */
+        @media (max-width: 768px) {
+
+            .hero-services-grid,
+            .services-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            header .container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .timeline::after {
+                left: 15px;
+            }
+
+            .timeline-item {
+                padding: 10px 0 30px 50px;
+            }
+
+            .timeline-item .timeline-dot {
+                left: 5px;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            .hero,
+            .content-section {
+                padding: 60px 0;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero-services-grid,
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body class="preloader-active">
+
+    <!-- =================================================================== -->
+    <!-- ======================= CÓDIGO HTML DA PÁGINA ======================= -->
+    <!-- =================================================================== -->
+
+    <!-- Preloader (Página de Carregamento) -->
+    <div id="preloader" class="preloader">
+        <div class="preloader-logo">
+            <!-- Cada letra está num span para ser animada individualmente. -->
+            <span>A</span><span>r</span><span>c</span><span>D</span><span>e</span><span>v</span>
+        </div>
+    </div>
+
+    <!-- Cabeçalho -->
+    <header>
+        <div class="container">
+            <a href="index.html" class="logo">ArcDev</a>
+            <nav id="main-nav">
+                <ul>
+                    <li><a href="#como-funciona">Como Funciona</a></li>
+                    <li><a href="#orcamento">Orçamento</a></li>
+                    <li><a href="sobre.html">Sobre Nós</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Seção Inicial -->
+        <section id="inicio" class="hero">
+            <div class="parallax-bg-image"></div>
+            <div class="hero-content container">
+                <h1 class="animate-on-scroll">Construímos a solução que o seu negócio precisa.</h1>
+                <p class="hero-description animate-on-scroll delay-1">
+                    Desde sistemas robustos a automações inteligentes, explore como podemos ajudar a impulsionar os seus
+                    resultados.
+                </p>
+                <a href="#servicos" class="btn animate-on-scroll delay-2"
+                    style="max-width: 300px; margin: 0 auto;">Explore Nossos Serviços</a>
+            </div>
+        </section>
+
+        <!-- Seção de Serviços -->
+        <section id="servicos" class="content-section">
+            <div class="container">
+                <h2 class="animate-on-scroll">Nossas Soluções</h2>
+                <p class="section-description animate-on-scroll delay-1">
+                    Seja qual for o seu desafio, a nossa comunidade de especialistas está pronta para construir a
+                    solução perfeita para o seu negócio.
+                </p>
+                <div class="services-grid">
+                    <div class="service-card animate-on-scroll delay-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
+                        </svg>
+                        <h3>Contrato com Prefeituras</h3>
+                        <p>Modernizamos a gestão pública com sistemas desenhados para as necessidades do seu município.
+                        </p>
+                    </div>
+                    <div class="service-card animate-on-scroll delay-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25A2.25 2.25 0 015.25 3h13.5A2.25 2.25 0 0121 5.25z" />
+                        </svg>
+                        <h3>Site ou Portfólio</h3>
+                        <p>Criamos a sua presença digital com sites de alto impacto, focados em design e experiência do
+                            utilizador.</p>
+                    </div>
+                    <div class="service-card animate-on-scroll delay-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375" />
+                        </svg>
+                        <h3>Sistema Personalizado</h3>
+                        <p>Otimize os seus processos com sistemas web construídos sob medida para a sua operação.</p>
+                    </div>
+                    <div class="service-card animate-on-scroll delay-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.76 9.76 0 01-2.53-0.471l-5.459 2.729a.75.75 0 01-1.004-.823l1.833-4.281A9.727 9.727 0 013 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
+                        </svg>
+                        <h3>Automação de WhatsApp</h3>
+                        <p>Atendimento 24/7 e comunicação otimizada com bots e automações inteligentes para WhatsApp.
+                        </p>
+                    </div>
+                    <div class="service-card animate-on-scroll delay-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                        </svg>
+                        <h3>Automação de Escritório</h3>
+                        <p>Liberte a sua equipa de tarefas repetitivas. Integramos as suas ferramentas e automatizamos o
+                            seu fluxo de trabalho.</p>
+                    </div>
+                    <div class="service-card animate-on-scroll delay-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.658-.463 1.243-1.117 1.243H4.25a1.125 1.125 0 01-1.117-1.243l1.263-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.117 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                        </svg>
+                        <h3>Loja Virtual (E-commerce)</h3>
+                        <p>Venda mais com lojas virtuais de alta performance, com design atraente e otimizadas para
+                            conversão.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Como Funciona -->
+        <section id="como-funciona" class="content-section dark-bg">
+            <div class="container">
+                <h2 class="animate-on-scroll">Um Processo Transparente, do Início ao Fim</h2>
+                <p class="section-description animate-on-scroll delay-1">
+                    Transformamos a sua ideia em realidade através de um processo transparente e colaborativo, focado em
+                    entregar a melhor solução para o seu negócio.
+                </p>
+                <div class="timeline">
+                    <!-- Passo 1 -->
+                    <div class="timeline-item animate-on-scroll delay-2">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h3>1. Contato Inicial</h3>
+                            <p>Você nos conta a sua ideia. Nós ouvimos atentamente para entender os seus objetivos e
+                                desafios.</p>
+                        </div>
+                    </div>
+                    <!-- Passo 2 -->
+                    <div class="timeline-item animate-on-scroll delay-3">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h3>2. Análise e Propostas</h3>
+                            <p>A nossa comunidade de especialistas analisa o seu projeto e você recebe múltiplas
+                                propostas competitivas.</p>
+                        </div>
+                    </div>
+                    <!-- Passo 3 -->
+                    <div class="timeline-item animate-on-scroll delay-4">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h3>3. Prévia e Desenvolvimento</h3>
+                            <p>Você escolhe a melhor proposta e acompanha o desenvolvimento com prévias para garantir
+                                que tudo saia como planeado.</p>
+                        </div>
+                    </div>
+                    <!-- Passo 4 -->
+                    <div class="timeline-item animate-on-scroll delay-4">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h3>4. Contrato e Entrega Final</h3>
+                            <p>Com a sua aprovação final, formalizamos o contrato e fazemos o lançamento do seu projeto,
+                                pronto para gerar resultados.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Orçamento -->
+        <section id="orcamento" class="content-section">
+            <div class="container">
+                <h2 class="animate-on-scroll">Transforme a Sua Ideia em Realidade</h2>
+                <p class="section-description animate-on-scroll delay-1">
+                    Quanto mais detalhes você fornecer, mais precisas e competitivas serão as propostas que irá receber.
+                    Comece agora.
+                </p>
+                <form id="contact-form" action="https://formspree.io/f/xblzdenq" method="POST"
+                    class="orcamento-form animate-on-scroll delay-2">
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Nome *</label>
+                            <input type="text" id="name" name="name" placeholder="Seu nome completo" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Telefone (WhatsApp) *</label>
+                            <input type="tel" id="phone" name="phone" placeholder="(xx) xxxxx-xxxx" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">E-mail *</label>
+                        <input type="email" id="email" name="email" placeholder="E-mail para retorno de orçamento"
+                            required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="demanda">Descreva sua demanda *</label>
+                        <textarea id="demanda" name="demanda" rows="8"
+                            placeholder="Descreva exatamente o que está buscando. Quanto mais detalhes, mais rápido conseguimos dar um retorno. Descrições muito vagas irão atrasar todo o processo. Favor incluir detalhes!"
+                            required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn">
+                        <span>Receber Orçamentos Gratuitos</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                            viewBox="0 0 16 16">
+                            <path
+                                d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H.5a.5.5 0 0 0 0 1h13.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />
+                        </svg>
+                    </button>
+                </form>
+                <div id="form-status" class="form-status"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <!-- Lembre-se de substituir 'your-profile', 'yourphonenumber', e 'your-username' pelos seus links reais. -->
+                <a href="https://instagram.com/your-profile" target="_blank" rel="noopener noreferrer"
+                    aria-label="Instagram da ArcDev">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                </a>
+                <a href="https://wa.me/yourphonenumber" target="_blank" rel="noopener noreferrer"
+                    aria-label="WhatsApp da ArcDev">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24"
+                        height="24">
+                        <path
+                            d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zM12.04 20.21c-1.54 0-3.04-.39-4.38-1.15l-.31-.18-3.26.86.88-3.18-.2-.33c-.85-1.4-1.29-3-1.29-4.64 0-4.52 3.67-8.19 8.19-8.19 2.22 0 4.29.86 5.8 2.37s2.37 3.58 2.37 5.8c0 4.52-3.67 8.19-8.19 8.19zm4.27-5.47c-.24-.12-1.42-.7-1.64-.78-.23-.08-.39-.12-.56.12-.17.24-.62.78-.76.94s-.28.17-.52.05c-.24-.12-1.02-.38-1.94-1.2s-1.4-1.68-1.56-1.98c-.17-.3-.02-.46.1-.61.11-.13.24-.33.36-.49.12-.17.16-.28.24-.48.08-.2.04-.37-.02-.49-.06-.12-.56-1.34-.76-1.84s-.4-.42-.56-.42h-.5c-.17 0-.42.06-.64.3s-.84.82-.84 2c0 1.18.86 2.32 1 2.48.12.17 1.69 2.58 4.1 3.6.58.24 1.03.38 1.39.49.52.16 1 .14 1.38.08.43-.06 1.42-.58 1.62-1.14s.2-1.06.14-1.18c-.05-.12-.2-.18-.44-.3z">
+                        </path>
+                    </svg>
+                </a>
+                <a href="https://github.com/your-username" target="_blank" rel="noopener noreferrer"
+                    aria-label="GitHub da ArcDev">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24"
+                        height="24">
+                        <path
+                            d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.034c-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.565 21.796 24 17.3 24 12c0-6.627-5.373-12-12-12z">
+                        </path>
+                    </svg>
+                </a>
+            </div>
+            <p>&copy; 2025 ArcDev. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+
+    <!-- =================================================================== -->
+    <!-- ======================= CÓDIGO JAVASCRIPT ======================= -->
+    <!-- =================================================================== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- LÓGICA DO PRELOADER ---
+            const preloader = document.getElementById('preloader');
+            document.body.classList.add('preloader-active');
+
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    preloader.classList.add('hidden');
+                    document.body.classList.remove('preloader-active');
+
+                    setTimeout(() => {
+                        if (preloader) {
+                            preloader.style.display = 'none';
+                        }
+                    }, 1000);
+                }, 1500); // Duração total aproximada de 2.1s (animação das letras + fade out)
+            });
+
+            // --- LÓGICA DE ROLAGEM SUAVE ---
+            const navLinks = document.querySelectorAll('nav a[href^="#"]');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+
+            // --- LÓGICA DE ANIMAÇÃO NO SCROLL ---
+            const animatedElements = document.querySelectorAll('.animate-on-scroll');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('show');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            animatedElements.forEach(el => observer.observe(el));
+
+            // --- EFEITO PARALLAX NO CONTEÚDO DO HERO ---
+            const heroContent = document.querySelector('.hero-content');
+            window.addEventListener('scroll', () => {
+                const scrollPosition = window.scrollY;
+                if (scrollPosition < window.innerHeight) {
+                    heroContent.style.transform = `translateY(${scrollPosition * 0.3}px)`;
+                    heroContent.style.opacity = 1 - (scrollPosition / (window.innerHeight / 1.5));
+                }
+            });
+
+            // --- LÓGICA DO FORMULÁRIO DE CONTATO ---
+            const form = document.getElementById('contact-form');
+            const formStatus = document.getElementById('form-status');
+            async function handleSubmit(event) {
+                event.preventDefault();
+                const data = new FormData(event.target);
+
+                fetch(event.target.action, {
+                    method: form.method,
+                    body: data,
+                    headers: { 'Accept': 'application/json' }
+                }).then(response => {
+                    if (response.ok) {
+                        formStatus.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> <span>Obrigado! A sua mensagem foi enviada com sucesso.</span>`;
+                        formStatus.className = 'form-status success is-visible';
+                        form.reset();
+                    } else {
+                        formStatus.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" /></svg> <span>Ocorreu um erro. Por favor, tente novamente.</span>`;
+                        formStatus.className = 'form-status error is-visible';
+                    }
+                }).catch(error => {
+                    formStatus.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" /></svg> <span>Ocorreu um erro. Por favor, tente novamente.</span>`;
+                    formStatus.className = 'form-status error is-visible';
+                });
+
+                setTimeout(() => {
+                    formStatus.classList.remove('is-visible');
+                }, 5000);
+            }
+            form.addEventListener("submit", handleSubmit);
+        });
+    </script>
+</body>
+
+</html>
